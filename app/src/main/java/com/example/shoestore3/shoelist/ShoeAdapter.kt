@@ -6,8 +6,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shoestore3.databinding.RvListBinding
 import com.example.shoestore3.db.ShoeStoreTable
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class ShoeAdapter @Inject constructor(): RecyclerView.Adapter<ShoeAdapter.ShoeViewHolder>() {
 
     var dataList = ArrayList<ShoeStoreTable>()
@@ -38,8 +40,9 @@ class ShoeAdapter @Inject constructor(): RecyclerView.Adapter<ShoeAdapter.ShoeVi
     }}
 
     fun setItems(shoestoretable: List<ShoeStoreTable>) {
-        this.shoestoretable.clear()
-        this.shoestoretable.addAll(shoestoretable)
+       // this.shoestoretable.clear()
+       // this.shoestoretable.addAll(shoestoretable)
+        this.shoestoretable = shoestoretable
         notifyDataSetChanged()
     }
 

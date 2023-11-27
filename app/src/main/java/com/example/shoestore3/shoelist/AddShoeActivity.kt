@@ -7,7 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.shoestore3.databinding.RvAddItemBinding
 import com.example.shoestore3.db.ShoeStoreTable
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddShoeActivity : AppCompatActivity() {
 
     private lateinit var binding: RvAddItemBinding
@@ -33,7 +35,6 @@ class AddShoeActivity : AppCompatActivity() {
                     shoeSize = shoeSize,
                     description = description)
                 ShoeVM.insert(ShoeStoreTable)
-
                 finish()
             } else {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
