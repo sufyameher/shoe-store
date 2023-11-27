@@ -11,14 +11,14 @@ import androidx.room.Update
 interface ShoeStoreDAO {
 
     @Insert
-    suspend fun insertShoeStore(shoeStoreTable: ShoeStoreTable)
+    suspend fun insertShoeStore(shoeStoreEntity: ShoeStoreEntity)
 
     @Delete
-    suspend fun deleteShoeStore(shoeStoreTable: ShoeStoreTable)
+    suspend fun deleteShoeStore(shoeStoreEntity: ShoeStoreEntity)
 
     @Update
-    suspend fun updateShoeStore(shoeStoreTable: ShoeStoreTable)
+    suspend fun updateShoeStore(shoeStoreEntity: ShoeStoreEntity)
 
-    @Query("SELECT * FROM shoestoretable")    //to get data from db
-    fun getAllShoeStore(): LiveData<List<ShoeStoreTable>>
+    @Query("SELECT * FROM $SHOE_STORE_ENTITY")    //to get data from db
+    fun getAllShoeStore(): LiveData<List<ShoeStoreEntity>>
 }

@@ -29,15 +29,15 @@ class ListActivity : AppCompatActivity() {
         binding.recyclerView.adapter = shoeAdapter
 
 
-        val recyclerView = binding.recyclerView
-        val adapter = ShoeAdapter()
+//        val recyclerView = binding.recyclerView
+//        val adapter = ShoeAdapter()
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = adapter
+        //recyclerView.layoutManager = LinearLayoutManager(this)
+        //recyclerView.adapter = adapter
 
         shoeVM = ViewModelProvider(this).get(ShoeVM::class.java)
         shoeVM.allShoeStoreTable.observe(this, Observer { shoestoretable ->
-            shoestoretable?.let { adapter.setItems(it) }
+            shoestoretable?.let { shoeAdapter.setItems(it) }
         })
 
         binding.addButton.setOnClickListener {
@@ -46,6 +46,5 @@ class ListActivity : AppCompatActivity() {
         }
 
     }
-
 }
 

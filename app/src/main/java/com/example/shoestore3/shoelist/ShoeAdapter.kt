@@ -4,17 +4,19 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shoestore3.databinding.RvItemBinding
 import com.example.shoestore3.databinding.RvListBinding
-import com.example.shoestore3.db.ShoeStoreTable
+import com.example.shoestore3.db.ShoeStoreEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class ShoeAdapter @Inject constructor(): RecyclerView.Adapter<ShoeAdapter.ShoeViewHolder>() {
+class ShoeAdapter @Inject constructor() : RecyclerView.Adapter<ShoeAdapter.ShoeViewHolder>() {
 
-    var dataList = ArrayList<ShoeStoreTable>()
+    var dataList = ArrayList<ShoeStoreEntity>()
 
-    inner class ShoeViewHolder(private val binding: RvListBinding) :RecyclerView.ViewHolder(binding.root){
+    inner class ShoeViewHolder(private val binding: RvItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         val textName: TextView = binding.textName
         val textCompany: TextView = binding.textCompany
         val textSize: TextView = binding.textSize
@@ -22,29 +24,26 @@ class ShoeAdapter @Inject constructor(): RecyclerView.Adapter<ShoeAdapter.ShoeVi
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoeViewHolder {
-        val binding = RvListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = RvItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ShoeViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
-       return dataList.size
+        return dataList.size
     }
 
-    override fun onBindViewHolder(holder:  ShoeViewHolder, position: Int) {
-         //ShoeViewHolder, position: Int)
-        val currentItem = shoestoretable[position]
+    override fun onBindViewHolder(holder: ShoeViewHolder, position: Int) {
+        //ShoeViewHolder, position: Int)
+        val currentItem = dataList[position]
         holder.textName.text = currentItem.name
         holder.textCompany.text = currentItem.company
-        holder.textSize.text = currentItem.shoeSize.toString()
+        holder.textSize.text = currentItem.size.toString()
         holder.textDescription.text = currentItem.description
-    }}
-
-    fun setItems(shoestoretable: List<ShoeStoreTable>) {
-       // this.shoestoretable.clear()
-       // this.shoestoretable.addAll(shoestoretable)
-        this.shoestoretable = shoestoretable
-        notifyDataSetChanged()
     }
 
-
+    fun setItems(shoestoretable: List<ShoeStoreEntity>) {
+        dataList.clear()
+        dataList.addAll((shoestoretable))
+        notifyDataSetChanged()
+    }
 }

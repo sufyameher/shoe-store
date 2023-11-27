@@ -4,24 +4,15 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.room.Database
 import androidx.room.Room
-import com.example.shoestore3.compose.theme.ShoeStore3Theme
-import com.example.shoestore3.db.ShoeStoreDB
-import com.example.shoestore3.db.ShoeStoreTable
+import com.example.shoestore3.db.ShoeStoreDatabase
+import com.example.shoestore3.db.ShoeStoreEntity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
-    private lateinit var database: ShoeStoreDB
+    private lateinit var database: ShoeStoreDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -35,18 +26,18 @@ class MainActivity : ComponentActivity() {
             //   }
             database = Room.databaseBuilder(
                 applicationContext,
-                ShoeStoreDB::class.java,
+                ShoeStoreDatabase::class.java,
                 "ShoeStoreDb"
             ).build()
 
             GlobalScope.launch {
                 database.shoestoreDao().insertShoeStore(
-                    ShoeStoreTable(
+                    ShoeStoreEntity(
+                        "0",
                         "white shoe",
                         "nike",
                         "39",
-                        "This shoe is very comfortable"
-                    )
+                        "This shoe is very comfortable")
                 )
             }
 
